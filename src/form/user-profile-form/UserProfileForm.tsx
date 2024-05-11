@@ -58,6 +58,18 @@ const UserProfileForm = ({ onSave, isLoading }: Props) => {
             </FormItem>
           )}
         />
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input {...field} className=" bg-white" />
+              </FormControl>
+            </FormItem>
+          )}
+        />
         {/* form field */}
         {/* TODO encapsulate FormField */}
         <div className=" flex flex-col md:flex-row gap-4">
