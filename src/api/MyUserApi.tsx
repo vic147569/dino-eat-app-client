@@ -3,17 +3,17 @@ import { useMutation } from 'react-query'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
+// use react-query and custom hook to create user
+/**
+ |--------------------------------------------------
+ | auth -> get token -> create user with token
+ |--------------------------------------------------
+ */
+
 type CreateUserRequest = {
   auth0Id: string
   email: string
 }
-
-// use react-query and custom hook to create user
-/**
-|--------------------------------------------------
-| auth -> get token -> create user with token
-|--------------------------------------------------
-*/
 export const useCreateMyUser = () => {
   const { getAccessTokenSilently } = useAuth0()
 
@@ -28,7 +28,7 @@ export const useCreateMyUser = () => {
       body: JSON.stringify(user)
     })
     if (!response.ok) {
-      throw new Error('Fail to create user')
+      throw new Error('Failed to create user')
     }
   }
 
@@ -40,4 +40,42 @@ export const useCreateMyUser = () => {
   } = useMutation(createMyUserRequest)
 
   return { createUser, isLoading, isError, isSuccess }
+}
+
+type UpdateUserRequest = {
+  name: string
+  addressLine1: string
+  city: string
+  country: string
+}
+
+export const useUpdateMyUser = () => {
+  const { getAccessTokenSilently } = useAuth0()
+
+  const updateMyUserRequest = async (formData: UpdateUserRequest) => {
+    const token = await getAccessTokenSilently()
+    const response = await fetch(`${API_BASE_URL}/api/my/user`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    if (!response.ok) {
+      throw new Error('Failed to update user')
+    }
+    return response.json
+  }
+
+  const {
+    mutateAsync: updateUser,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+    reset
+  } = useMutation(updateMyUserRequest)
+
+  return { updateUser, isLoading, isSuccess, isError, error, reset }
 }
