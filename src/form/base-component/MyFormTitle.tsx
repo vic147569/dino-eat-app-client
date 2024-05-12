@@ -8,14 +8,8 @@ type Props = {
 const MyFormTitle = ({ title, desc }: Props) => {
   return (
     <div>
-      <h2 className=" text-2xl font-bold">
-        {title}
-        {/* User Profile Form */}
-      </h2>
-      <FormDescription>
-        {desc}
-        {/* View and change your profile information here */}
-      </FormDescription>
+      <h2 className=" text-2xl font-bold">{title}</h2>
+      <FormDescription>{desc}</FormDescription>
     </div>
   )
 }

@@ -3,6 +3,8 @@ import { formSchema, RestaurantFormData } from './formSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from '@/components/ui/form'
 import DetailsSection from './c-cpns/DetailsSection'
+import { Separator } from '@/components/ui/separator'
+import CuisinesSection from './c-cpns/CuisinesSection'
 
 type Props = {
   onSave: (restaurantFormData: FormData) => void
@@ -14,7 +16,7 @@ const ManageRestaurantForm = ({ onSave, isLoading }: Props) => {
   const form = useForm<RestaurantFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      cusines: [],
+      cuisines: [],
       menuItems: [{ name: '', price: 0 }]
     }
   })
@@ -31,6 +33,8 @@ const ManageRestaurantForm = ({ onSave, isLoading }: Props) => {
         className=" space-y-8 bg-gray-50 p-10 rounded-lg"
       >
         <DetailsSection />
+        <Separator />
+        <CuisinesSection />
       </form>
     </Form>
   )
