@@ -1,11 +1,11 @@
-import LoadingButton from '@/components/LoadingButton'
 import { Form } from '@/components/ui/form'
 import { User } from '@/types'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import SubmitButton from './c-cpns/SubmitButton'
 import { formSchema, UserFormData } from './formSchema'
+import LoadingButton from '@/form/base-component/LoadingButton'
+import SubmitButton from '@/form/base-component/SubmitButton'
 import MyFormTitle from '@/form/base-component/MyFormTitle'
 import MyFormField from '@/form/base-component/MyFormField'
 

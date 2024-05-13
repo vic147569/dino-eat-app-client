@@ -6,6 +6,9 @@ import DetailsSection from './section/DetailsSection'
 import { Separator } from '@/components/ui/separator'
 import CuisinesSection from './section/CuisinesSection'
 import MenuSection from './section/MenuSection'
+import ImageSection from './section/ImageSection'
+import LoadingButton from '../base-component/LoadingButton'
+import SubmitButton from '../base-component/SubmitButton'
 
 type Props = {
   onSave: (restaurantFormData: FormData) => void
@@ -18,7 +21,7 @@ const ManageRestaurantForm = ({ onSave, isLoading }: Props) => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       cuisines: [],
-      menuItems: [{ name: '', price: 0 }]
+      menuItems: [{}]
     }
   })
 
@@ -38,6 +41,9 @@ const ManageRestaurantForm = ({ onSave, isLoading }: Props) => {
         <CuisinesSection />
         <Separator />
         <MenuSection />
+        <Separator />
+        <ImageSection />
+        {isLoading ? <LoadingButton /> : <SubmitButton />}
       </form>
     </Form>
   )
