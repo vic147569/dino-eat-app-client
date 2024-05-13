@@ -16,23 +16,26 @@ type FormProps = {
 const MyFormField = ({ name, label, style }: FormProps) => {
   const { control } = useFormContext()
 
-  let disable = false
+  const disable = name == 'email'
 
-  if (name == 'email') {
-    disable = true
-  }
+  const flag = name.startsWith('menuItems') ? true : false
+  const style1 = flag ? '' : style
+  const style2 = flag ? style : ''
 
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className={style}>
-          <FormLabel>{label}</FormLabel>
+        <FormItem className={style1}>
+          <FormLabel className={style2}>
+            {label}
+            {flag && <FormMessage />}
+          </FormLabel>
           <FormControl>
             <Input {...field} disabled={disable} className=" bg-white" />
           </FormControl>
-          <FormMessage />
+          {!flag && <FormMessage />}
         </FormItem>
       )}
     />
