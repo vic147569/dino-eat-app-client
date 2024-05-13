@@ -2,7 +2,7 @@ import { FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { cuisineList } from '@/config/restaurant-options-config'
 import MyFormTitle from '@/form/base-component/MyFormTitle'
 import { useFormContext } from 'react-hook-form'
-import CuisineCheckbox from './CuisineCheckbox'
+import CuisineCheckbox from '../c-cpns/CuisineCheckbox'
 
 const CuisinesSection = () => {
   const { control } = useFormContext()

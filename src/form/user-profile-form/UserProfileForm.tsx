@@ -37,7 +37,6 @@ const UserProfileForm = ({ currentUser, onSave, isLoading }: Props) => {
         <MyFormField name="email" label="Email" style={'100'} />
         <MyFormField name="name" label="Name" style={'100'} />
         <div className=" flex flex-col md:flex-row gap-4">
-          {/* flex flex-col md:flex-row gap-4 */}
           <MyFormField
             name="addressLine1"
             label="Address Line 1"

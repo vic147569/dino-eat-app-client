@@ -13,9 +13,8 @@ type FormProps = {
   label: string
   style: string
 }
-const MyFormField = (props: FormProps) => {
+const MyFormField = ({ name, label, style }: FormProps) => {
   const { control } = useFormContext()
-  const { name, label, style } = props
 
   let disable = false
 

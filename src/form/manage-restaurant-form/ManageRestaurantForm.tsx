@@ -2,9 +2,10 @@ import { useForm } from 'react-hook-form'
 import { formSchema, RestaurantFormData } from './formSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from '@/components/ui/form'
-import DetailsSection from './c-cpns/DetailsSection'
+import DetailsSection from './section/DetailsSection'
 import { Separator } from '@/components/ui/separator'
-import CuisinesSection from './c-cpns/CuisinesSection'
+import CuisinesSection from './section/CuisinesSection'
+import MenuSection from './section/MenuSection'
 
 type Props = {
   onSave: (restaurantFormData: FormData) => void
@@ -35,6 +36,8 @@ const ManageRestaurantForm = ({ onSave, isLoading }: Props) => {
         <DetailsSection />
         <Separator />
         <CuisinesSection />
+        <Separator />
+        <MenuSection />
       </form>
     </Form>
   )
