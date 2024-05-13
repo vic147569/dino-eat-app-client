@@ -11,6 +11,10 @@ const MenuSection = () => {
     name: 'menuItems'
   })
 
+  const handleAddButton = () => {
+    append({ name: '', price: '' })
+  }
+
   return (
     <div className=" space-y-2">
       <MyFormTitle
@@ -24,6 +28,7 @@ const MenuSection = () => {
           <FormItem className=" flex flex-col gap-2">
             {fields.map((_, index) => (
               <MenuItemInput
+                key={index}
                 index={index}
                 removeMenuItem={() => remove(index)}
               />
@@ -31,12 +36,7 @@ const MenuSection = () => {
           </FormItem>
         )}
       />
-      <Button
-        type="button"
-        onClick={() => {
-          append({ name: '', price: '' })
-        }}
-      >
+      <Button type="button" onClick={handleAddButton}>
         Add Menu Item
       </Button>
     </div>
