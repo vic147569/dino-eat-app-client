@@ -27,7 +27,7 @@ export const formSchema = z.object({
       price: z.coerce.number().min(1, 'price is required')
     })
   ),
-  imagefile: z.instanceof(File, { message: 'image is required' })
+  imageFile: z.instanceof(File, { message: 'image is required' })
 })
 
 export type RestaurantFormData = z.infer<typeof formSchema>
