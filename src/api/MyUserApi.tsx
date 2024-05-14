@@ -80,7 +80,6 @@ type UpdateUserRequest = {
   city: string
   country: string
 }
-
 export const useUpdateMyUser = () => {
   const { getAccessTokenSilently } = useAuth0()
 
