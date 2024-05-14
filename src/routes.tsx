@@ -5,6 +5,7 @@ import AuthCallbackPage from './pages/AuthCallbackPage'
 import UserProfilePage from './pages/UserProfilePage'
 import ProtectedRoute from './auth/ProtectedRoute'
 import ManageRestaurantPage from './pages/ManageRestaurantPage'
+import SearchPage from './pages/SearchPage'
 
 // TODO: rewrite to a route file
 function AppRoutes() {
@@ -19,6 +20,14 @@ function AppRoutes() {
         }
       ></Route>
       <Route path="/auth-callback" element={<AuthCallbackPage />}></Route>
+      <Route
+        path="/search/:city"
+        element={
+          <Layout showHero={false}>
+            <SearchPage />
+          </Layout>
+        }
+      ></Route>
       <Route element={<ProtectedRoute />}>
         <Route
           path="/user-profile"
