@@ -1,4 +1,5 @@
 import { useSearchRestaurants } from '@/api/RestaurantApi'
+import CuisineFilter from '@/components/CuisineFilter'
 import PaginationSelector from '@/components/PaginationSelector'
 import SearchBar, { SearchForm } from '@/components/SearchBar'
 import SearchResultCard from '@/components/SearchResultCard'
@@ -6,15 +7,30 @@ import SearchResultInfo from '@/components/SearchResultInfo'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-export type SearchState = { searchQuery: string; page: number }
+export type SearchState = {
+  searchQuery: string
+  page: number
+  selectedCuisines: string[]
+}
 
 const SearchPage = () => {
   const { city } = useParams()
   const [searchState, setSearchState] = useState<SearchState>({
     searchQuery: '',
-    page: 1
+    page: 1,
+    selectedCuisines: []
   })
+
   const { results, isLoading } = useSearchRestaurants(searchState, city)
+  const [isExpanded, setIsExpanded] = useState<boolean>(false)
+
+  const setSelectedCuisines = (selectedCuisines: string[]) => {
+    setSearchState((prevState) => ({
+      ...prevState,
+      selectedCuisines,
+      page: 1
+    }))
+  }
 
   const setPage = (page: number) => {
     setSearchState((prevState) => ({
@@ -49,7 +65,16 @@ const SearchPage = () => {
 
   return (
     <div className=" grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
-      <div id="cuisines-list">cuisines list</div>
+      <div id="cuisines-list">
+        <CuisineFilter
+          selectedCuisines={searchState.selectedCuisines}
+          onChange={setSelectedCuisines}
+          isExpanded={isExpanded}
+          onExpandedClick={() =>
+            setIsExpanded((prevIsExpanded) => !prevIsExpanded)
+          }
+        />
+      </div>
       <div id="main-content" className=" flex flex-col gap-5">
         <SearchBar
           searchQuery={searchState.searchQuery}
@@ -58,8 +83,8 @@ const SearchPage = () => {
           onReset={resetSearch}
         />
         <SearchResultInfo total={results.pagination.total} city={city} />
-        {results.data.map((restaurant) => (
-          <SearchResultCard restaurant={restaurant} />
+        {results.data.map((restaurant, index) => (
+          <SearchResultCard restaurant={restaurant} key={index} />
         ))}
         <PaginationSelector
           page={results.pagination.page}
