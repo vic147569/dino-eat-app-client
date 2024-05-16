@@ -1,9 +1,13 @@
 import { Button } from '@/components/ui/button'
 
-const SubmitButton = () => {
+type Props = {
+  buttonText: string
+}
+
+const SubmitButton = ({ buttonText }: Props) => {
   return (
     <Button type="submit" className=" bg-orange-500">
-      Submit
+      {buttonText}
     </Button>
   )
 }

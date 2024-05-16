@@ -13,8 +13,16 @@ type Props = {
   currentUser: User
   onSave: (userProfileData: UserFormData) => void
   isLoading: boolean
+  titleText?: string
+  buttonText?: string
 }
-const UserProfileForm = ({ currentUser, onSave, isLoading }: Props) => {
+const UserProfileForm = ({
+  currentUser,
+  onSave,
+  isLoading,
+  titleText = 'User Profile',
+  buttonText = 'Submit'
+}: Props) => {
   const form = useForm<UserFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: currentUser
@@ -24,7 +32,6 @@ const UserProfileForm = ({ currentUser, onSave, isLoading }: Props) => {
     form.reset(currentUser)
   }, [currentUser, form])
 
-  const title = 'User Profile Form'
   const desc = 'View and change your profile information here'
 
   return (
@@ -33,7 +40,7 @@ const UserProfileForm = ({ currentUser, onSave, isLoading }: Props) => {
         onSubmit={form.handleSubmit(onSave)}
         className=" space-y-4 bg-gray-50 rounded-lg md:p-10 min-h-[550px]"
       >
-        <MyFormTitle title={title} desc={desc} />
+        <MyFormTitle title={titleText} desc={desc} />
         <MyFormField name="email" label="Email" style={'100'} />
         <MyFormField name="name" label="Name" style={'100'} />
         <div className=" flex flex-col md:flex-row gap-4">
@@ -45,7 +52,11 @@ const UserProfileForm = ({ currentUser, onSave, isLoading }: Props) => {
           <MyFormField name="city" label="City" style="flex-1" />
           <MyFormField name="country" label="Country" style="flex-1" />
         </div>
-        {isLoading ? <LoadingButton /> : <SubmitButton />}
+        {isLoading ? (
+          <LoadingButton />
+        ) : (
+          <SubmitButton buttonText={buttonText} />
+        )}
       </form>
     </Form>
   )
