@@ -8,12 +8,12 @@ import {
 import { Input } from '@/components/ui/input'
 import { useFormContext } from 'react-hook-form'
 
-type FormProps = {
+type Props = {
   name: string
   label: string
   style: string
 }
-const MyFormField = ({ name, label, style }: FormProps) => {
+const MyFormField = ({ name, label, style }: Props) => {
   const { control } = useFormContext()
 
   const disable = name == 'email'

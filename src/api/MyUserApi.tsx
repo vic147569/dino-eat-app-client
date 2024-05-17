@@ -1,4 +1,4 @@
-import { User } from '@/types'
+import { CreateUserRequest, UpdateUserRequest, User } from '@/types'
 import { useAuth0 } from '@auth0/auth0-react'
 import { useMutation, useQuery } from 'react-query'
 import { toast } from 'sonner'
@@ -42,10 +42,6 @@ export const useGetMyUser = () => {
   return { currentUser, isLoading }
 }
 
-type CreateUserRequest = {
-  auth0Id: string
-  email: string
-}
 export const useCreateMyUser = () => {
   const { getAccessTokenSilently } = useAuth0()
 
@@ -74,12 +70,6 @@ export const useCreateMyUser = () => {
   return { createUser, isLoading, isError, isSuccess }
 }
 
-type UpdateUserRequest = {
-  name: string
-  addressLine1: string
-  city: string
-  country: string
-}
 export const useUpdateMyUser = () => {
   const { getAccessTokenSilently } = useAuth0()
 

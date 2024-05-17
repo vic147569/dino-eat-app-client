@@ -7,16 +7,9 @@ import RestaurantInfo from '@/components/DetailPageComp/RestaurantInfo'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
 import { Card, CardFooter } from '@/components/ui/card'
 import { UserFormData } from '@/form/user-profile-form/formSchema'
-import { MenuItem as MenuItemType } from '@/types'
+import { CartItem, MenuItem as MenuItemType } from '@/types'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-
-export type CartItem = {
-  _id: string
-  name: string
-  price: number
-  quantity: number
-}
 
 const DetailPage = () => {
   const { restaurantId } = useParams()
@@ -74,6 +67,7 @@ const DetailPage = () => {
 
   const onCheckout = async (userFormData: UserFormData) => {
     if (!restaurant) return
+
     const checkoutData = {
       cartItems: cartItems.map((cartItem) => ({
         menuItemId: cartItem._id,
@@ -89,6 +83,7 @@ const DetailPage = () => {
         email: userFormData.email as string
       }
     }
+
     const data = await createCheckoutSession(checkoutData)
     window.location.href = data.url
   }

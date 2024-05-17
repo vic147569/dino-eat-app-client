@@ -27,6 +27,13 @@ export type Restaurant = {
   lastUpdated: string
 }
 
+export type CartItem = {
+  _id: string
+  name: string
+  price: number
+  quantity: number
+}
+
 export type RestaurantSearchResponse = {
   data: Restaurant[]
   pagination: {
@@ -34,4 +41,40 @@ export type RestaurantSearchResponse = {
     page: number
     pages: number
   }
+}
+
+export type SearchState = {
+  searchQuery: string
+  page: number
+  selectedCuisines: string[]
+  sortOption: string
+}
+
+// myUserApi: createUserRequest
+export type CreateUserRequest = {
+  auth0Id: string
+  email: string
+}
+// updateUserRequest
+export type UpdateUserRequest = {
+  name: string
+  addressLine1: string
+  city: string
+  country: string
+}
+
+// order api: checkoutSessionRequest
+export type CheckoutSessionRequest = {
+  cartItems: {
+    menuItemId: string
+    name: string
+    quantity: string
+  }[]
+  deliveryDetails: {
+    email: string
+    name: string
+    addressLine1: string
+    city: string
+  }
+  restaurantId: string
 }

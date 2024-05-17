@@ -7,13 +7,7 @@ import CuisineFilter from '@/components/SearchPageComp/CuisineFilter'
 import PaginationSelector from '@/components/SearchPageComp/PaginationSelector'
 import SearchResultCard from '@/components/SearchPageComp/SearchResultCard'
 import SortOptionDropdown from '@/components/SearchPageComp/SortOptionDropdown'
-
-export type SearchState = {
-  searchQuery: string
-  page: number
-  selectedCuisines: string[]
-  sortOption: string
-}
+import { SearchState } from '@/types'
 
 const SearchPage = () => {
   const { city } = useParams()
