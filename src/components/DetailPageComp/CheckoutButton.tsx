@@ -10,9 +10,10 @@ import { UserFormData } from '@/form/user-profile-form/formSchema'
 type Props = {
   onCheckout: (userFormData: UserFormData) => void
   disabled: boolean
+  isLoading: boolean
 }
 
-const CheckoutButton = ({ onCheckout, disabled }: Props) => {
+const CheckoutButton = ({ onCheckout, disabled, isLoading }: Props) => {
   const { pathname } = useLocation()
   const {
     isAuthenticated,
@@ -37,7 +38,7 @@ const CheckoutButton = ({ onCheckout, disabled }: Props) => {
     )
   }
 
-  if (isAuthLoading || !currentUser) {
+  if (isAuthLoading || !currentUser || isLoading) {
     return <LoadingButton />
   }
 
