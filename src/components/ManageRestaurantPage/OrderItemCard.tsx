@@ -1,4 +1,4 @@
-import { Order } from '@/types'
+import { Order, OrderStatus } from '@/types'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
 import { Separator } from '../ui/separator'
 import { Badge } from '../ui/badge'
@@ -11,11 +11,25 @@ import {
   SelectValue
 } from '../ui/select'
 import { ORDER_STATUS } from '@/config/order-status-config'
+import { useUpdateMyRestaurantOrder } from '@/api/MyRestaurantApi'
+import { useEffect, useState } from 'react'
 
 type Props = {
   order: Order
 }
 const OrderItemCard = ({ order }: Props) => {
+  const [status, setStatus] = useState<OrderStatus>(order.status)
+  const { updateOrderStatus, isLoading } = useUpdateMyRestaurantOrder()
+
+  useEffect(() => {
+    setStatus(order.status)
+  }, [order.status])
+
+  const handleStatusChange = async (newStatus: OrderStatus) => {
+    await updateOrderStatus({ orderId: order._id, status: newStatus })
+    setStatus(newStatus)
+  }
+
   const getTime = () => {
     const orderDateTime = new Date(order.createdAt)
     const hours = orderDateTime.getHours()
@@ -54,8 +68,8 @@ const OrderItemCard = ({ order }: Props) => {
       </CardHeader>
       <CardContent className=" flex flex-col gap-6">
         <div className=" flex flex-col gap-2">
-          {order.cartItems.map((cartItem) => (
-            <span>
+          {order.cartItems.map((cartItem, index) => (
+            <span key={index}>
               <Badge variant="outline" className=" mr-2">
                 {cartItem.quantity}
               </Badge>
@@ -65,13 +79,19 @@ const OrderItemCard = ({ order }: Props) => {
         </div>
         <div className=" flex flex-col space-y-1.5">
           <Label htmlFor="status">What is the status of the order?</Label>
-          <Select>
+          <Select
+            value={status}
+            disabled={isLoading}
+            onValueChange={(value) => handleStatusChange(value as OrderStatus)}
+          >
             <SelectTrigger id="status">
               <SelectValue placeholder="Status" />
             </SelectTrigger>
             <SelectContent position="popper">
-              {ORDER_STATUS.map((status) => (
-                <SelectItem value={status.value}>{status.label}</SelectItem>
+              {ORDER_STATUS.map((status, index) => (
+                <SelectItem value={status.value} key={index}>
+                  {status.label}
+                </SelectItem>
               ))}
             </SelectContent>
           </Select>

@@ -138,7 +138,8 @@ export const useUpdateMyRestaurantOrder = () => {
   const updateMyRestaurantOrder = async (
     updateOrderStatusRequest: UpdateOrderStatusRequest
   ) => {
-    const accessToken = getAccessTokenSilently()
+    const accessToken = await getAccessTokenSilently()
+
     const response = await fetch(
       `${API_BASE_URL}/api/my/restaurant/order/${updateOrderStatusRequest.orderId}/status`,
       {
