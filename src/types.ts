@@ -91,6 +91,12 @@ export type UpdateUserRequest = {
   country: string
 }
 
+// update order status request
+export type UpdateOrderStatusRequest = {
+  orderId: string
+  status: string
+}
+
 // order api: checkoutSessionRequest
 export type CheckoutSessionRequest = {
   cartItems: {
