@@ -1,4 +1,21 @@
 Change Log
+### [0.0.2](https://github.com/vic147569/dino-eat-app-client/compare/v0.0.1...v0.0.2) (2024-05-19)
+
+
+### ✨ Features
+
+* **my restaurant api:** add get my restaurant order api ([1c8f753](https://github.com/vic147569/dino-eat-app-client/commit/1c8f753745de04b00f47a41f06f5a9d56dfe10d0))
+* **my restaurant api:** add update order status api ([177b5a5](https://github.com/vic147569/dino-eat-app-client/commit/177b5a5c1f8274af409d482fb39340cc5e2c3597))
+* **order api:** add order polling ([43f5404](https://github.com/vic147569/dino-eat-app-client/commit/43f5404386ef2b2a3e448ebdddd2ca8dd82320cd))
+* **order item card:** add handle status change function ([5bd8d2f](https://github.com/vic147569/dino-eat-app-client/commit/5bd8d2f6a0bbd9e26193d6c794948bc000f191c2))
+* **order item card:** add order item card ([0905f9d](https://github.com/vic147569/dino-eat-app-client/commit/0905f9d22eefb559448fd7c08731d312f9df0d60))
+* **order status page:** finish order status page ([e7d81ff](https://github.com/vic147569/dino-eat-app-client/commit/e7d81ff85047ec697134d6644b3bef88fda148a5))
+
+
+### 🐛 Bug Fixes
+
+* **layout:** adjust style ([b60f186](https://github.com/vic147569/dino-eat-app-client/commit/b60f18657031ed0996b94bf1064c424eae6fc1cd))
+
 ### 0.0.1 (2024-05-17)
 
 
